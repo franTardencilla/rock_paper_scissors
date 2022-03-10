@@ -12,10 +12,14 @@ function gameRound(userElection, computerElection){
     /*We first create a variable that holds all the possible values */
     const gameOptions = ["rock","paper","scissors"]
 
+    /* Then we pass the inputs to lower case so it's the comparison will be case insensitive*/
+    const userSelectionToLowerCase = userElection.toLowerCase()
+    const computerElectionToLowerCase = computerElection.toLowerCase()
+
     /**We check if the 2 options are the same or if the user input options that are not valid */
-    if(userElection == computerElection){
+    if(userSelectionToLowerCase == computerElectionToLowerCase){
         return "it's a tie"
-    } else if (!gameOptions.includes(userElection) || !gameOptions.includes(computerElection)){
+    } else if (!gameOptions.includes(userSelectionToLowerCase) || !gameOptions.includes(computerElectionToLowerCase)){
         return "Please enter a valid option"
     }
 
@@ -23,12 +27,12 @@ function gameRound(userElection, computerElection){
      * If everything is ok, we then get check if the computer won, if not it means the user won
      */
 
-    const computerWins = (userElection == "rock" && computerElection == "paper") 
-    || (userElection == "paper" && computerElection == "scissors") 
-    || (userElection == "scissors" && computerElection == "rock")
+    const computerWins = (userSelectionToLowerCase == "rock" && computerElectionToLowerCase == "paper") 
+    || (userSelectionToLowerCase == "paper" && computerElectionToLowerCase == "scissors") 
+    || (userSelectionToLowerCase == "scissors" && computerElectionToLowerCase == "rock")
 
     /*Construct the message with the winner and why it won */
-    const result = computerWins ? `The computer wins ${computerElection} beats ${userElection} ` : `The user wins ${userElection} beats ${computerElection} `
+    const result = computerWins ? `The computer wins ${computerElectionToLowerCase} beats ${userSelectionToLowerCase} ` : `The user wins ${userSelectionToLowerCase} beats ${computerElectionToLowerCase} `
     return result
     
 }
