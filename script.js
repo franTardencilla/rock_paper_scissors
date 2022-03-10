@@ -36,3 +36,40 @@ function gameRound(userElection, computerElection){
     return result
     
 }
+
+/**
+ * This is the main entry for the game
+ */
+function game(){
+    var allWins = []
+
+    for (let i = 0; i < 5 ; i++){
+        var userInput = prompt("Rock, paper, scissors?")
+        var result = gameRound(userInput,computerPlay())
+        allWins.push(result)
+        console.log(result)
+    }
+   console.log(checkTheUltimateWinner(allWins))
+
+}
+
+/**
+ * This function helps determine who won the game by adding up all the wins of each player
+ * @param {this is the array of all the results obtained from the game} allWins 
+ * @returns a string telling who won the game
+ */
+function checkTheUltimateWinner(allWins){
+    var userWins = 0
+    var computerWins = 0
+
+    /**We iterate through all of the results received */
+    allWins.forEach(win => {
+        /** if it is a tie then return because this does not count to anybody */
+        if(win.includes("it's a tie")) return
+        win.includes("computer wins") ? computerWins++ : userWins++
+        
+    });
+
+    console.log(`user wins ${userWins} and computer wins ${computerWins}`)
+    return userWins > computerWins ? "the user won the game" : "the computer won the game"
+}
