@@ -1,3 +1,12 @@
+
+
+const buttons = document.querySelectorAll("#selection")
+const container = document.querySelector(".container")
+var allWins = []
+
+buttons.forEach(button => button.addEventListener("click",
+(e) => game(e.target.innerHTML)))
+
 function computerPlay(){
     /*We first create an array for all 3 different types of possible plays*/
     const results = ["rock", "paper", "scissors"]
@@ -40,17 +49,11 @@ function gameRound(userElection, computerElection){
 /**
  * This is the main entry for the game
  */
-function game(){
-    var allWins = []
-
-    for (let i = 0; i < 5 ; i++){
-        var userInput = prompt("Rock, paper, scissors?")
-        var result = gameRound(userInput,computerPlay())
-        allWins.push(result)
-        console.log(result)
-    }
-   console.log(checkTheUltimateWinner(allWins))
-
+function game(userInput){
+   
+    var result = gameRound(userInput,computerPlay())
+    allWins.push(result)
+    allWins.length == 5 ? showResults(checkTheUltimateWinner(allWins), result) : showResults(result)
 }
 
 /**
@@ -73,3 +76,19 @@ function checkTheUltimateWinner(allWins){
     console.log(`user wins ${userWins} and computer wins ${computerWins}`)
     return userWins > computerWins ? "the user won the game" : "the computer won the game"
 }
+
+function showResults(textToShow,...otherText){
+    const finalResultsTxt = otherText
+
+    if(finalResultsTxt.length !== 0){
+        const winner_div = document.createElement("div")
+        winner_div.textContent = finalResultsTxt.shift()
+        container.appendChild(winner_div)
+        allWins.length = 0
+    }
+    const div_results = document.createElement("div")
+    div_results.textContent = textToShow
+    container.appendChild(div_results)
+
+}
+
